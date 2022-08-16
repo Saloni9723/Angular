@@ -1,0 +1,230 @@
+<div class="container">
+  <div class="btns" style="display: flex;margin:30px 0px 10px 0px; text-align: end; justify-content: space-between;">
+    <button class="btn btn-outline-primary" (click)="route()">Dashboard</button>
+    <div class="buttons">
+      <button class="btn btn-outline-success" data-bs-target="#addTaskModal" data-bs-toggle="modal">+Add task</button>
+      <button class="btn btn-outline-danger" data-bs-target="#editTaskModal" data-bs-toggle="modal"
+        (click)="onEditTask()">Edit task</button>
+    </div>
+  </div>
+
+
+
+
+  <div class="tasktable" style="max-height: 250px; overflow-y: auto; position: relative;">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Task Name</th>
+          <th> Task Comment</th>
+          <th>Task Created by</th>
+          <th>Total Amount</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let i of taskData;let taskIndex = index" [ngClass]="{'active':i?.id == activeId}"
+          [class]="taskArr===i ? 'backgr': '' " (click)="getActive(i.id)" (click)="getTaskData(i,taskIndex)">
+          <td>
+            {{i.task_name}}
+          </td>
+          <td>
+            {{i.description}}
+          </td>
+          <td>
+            {{i.created_by}}
+          </td>
+          <td>
+            <!-- {{amount(i.total)}} -->
+            {{i.total}}
+          </td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+
+  <app-line [lineData]="lineData" [taskArr]="taskArr"></app-line>
+
+
+
+
+  <div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Taskk</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="task">
+            <div class="col-md-3">
+              <input type="text" formControlName="task_name" placeholder="Enter Task Name" required>
+            </div>
+            <div class="col-md-3">
+              <input type="text" formControlName="created_by" placeholder="Created_by" required>
+            </div>
+            <div class="col-md-3">
+              <input type="text" formControlName="description" placeholder="Enter Decription" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="addTask()"
+            (click)="onclick()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit task</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="editTask">
+            <div class="col-md-3">
+              <input type="text" formControlName="task_name" placeholder="Enter Task Name" required>
+            </div>
+            <div class="col-md-3">
+              <input type="text" formControlName="created_by" placeholder="Created_by" required>
+            </div>
+            <div class="col-md-3">
+              <input type="text" formControlName="description" placeholder="Enter Decription" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="taskEditSave()">Save
+            changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="container">
+    <div class="btns" style="display: flex;margin:30px 0px 10px 0px; text-align: end; justify-content: space-between;">
+      <div></div>
+      <div class="buttons">
+        <button class="btn btn-outline-success" data-bs-target="#addLineModal" data-bs-toggle="modal">+Add Item</button>
+        <button class="btn btn-outline-danger" data-bs-target="#editLineModal" data-bs-toggle="modal"
+          (click)="onEditLine()">Edit Item</button>
+      </div>
+    </div>
+    <div class="container" style="margin-top: 20px;max-height: 250px; overflow-y: auto;"> -->
+
+      <!-- <table class="table" style="margin-top: 20px;">
+        <thead>
+          <tr>
+            <th>Line1 Item</th>
+            <th>Line1 Comment</th>
+            <th>Line1 Created by</th>
+            <th>
+              <p style="width:100px;padding:0px;margin:0px">Amount</p>
+            </th>
+          </tr>
+
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of lineData;let lineIndex = index" [ngClass]="{'active':item?.id == active_id}"
+            (click)="getactive(item.id)" (click)="getLineData(item)">
+            <td>
+              {{item.lineitem_name}}
+            </td>
+            <td>
+              {{item.description}}
+            </td>
+            <td>
+              {{item.created_by}}
+            </td>
+            <td>
+              {{item.amount}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+    <!-- <div class="modal fade" id="addLineModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add item</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="line">
+              <div class="col-md-3">
+                <input type="text" formControlName="lineitem_name" placeholder="Enter Item Name" required>
+              </div>
+              <div class="col-md-3">
+                <input type="text" formControlName="created_by" placeholder="Created_by" required>
+              </div>
+              <div class="col-md-3">
+                <input type="text" formControlName="description" placeholder="Enter Decription" required>
+              </div>
+              <div class="col-md-3">
+                <input type="text" formControlName="amount" placeholder="Enter Amount" required>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="addLine()">Save
+              changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="editLineModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit item</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="editLine">
+              <div class="col-md-3">
+                <input type="text" formControlName="lineitem_name" placeholder="Enter Item Name" required>
+              </div>
+              <div class="col-md-3">
+                <input type="text" formControlName="created_by" placeholder="Created_by" required>
+              </div>
+              <div class="col-md-3">
+                <input type="text" formControlName="description" placeholder="Enter Decription" required>
+              </div>
+              <div class="col-md-3">
+                <input type="text" formControlName="amount" placeholder="Enter Amount" style="background:lightgrey"
+                  readonly>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="editLineSave()">Save
+              changes</button>
+          </div>
+        </div>
+      </div>
+    </div> -->

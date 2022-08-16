@@ -1,0 +1,18 @@
+<div class="container" style="margin-top: 100px;">
+    <div class="row-sm-12">
+        <div class="col-md-5">
+        <form [formGroup]="form">
+            <div class="col-md-5">
+            
+                <input type="text" formControlName="email" placeholder="E-mail Address" required>
+            </div>
+            <br>
+            <div class="col-md-5">
+                <input type="text" formControlName="password" placeholder="Enter Password" required>
+            </div>
+        </form>
+        <br>
+        <button class="btn btn-outline-primary" type="submit" (click)="login()">Login</button>
+        </div>
+    </div>
+</div>

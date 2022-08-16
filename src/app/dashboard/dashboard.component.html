@@ -1,0 +1,84 @@
+<div class="container" style="min-width: 1240px;">
+    <div class="mainContainer" style="display: flex; margin: 7%;">
+        <ng-container *ngFor="let i of todoList">
+            <div class="label">
+                <div class="rowHead">
+                    <h5 class="taskStatus  text-muted">To Do's</h5>
+                    <div class="count">{{i.tasks.length}}</div>
+                </div>
+
+                <div class="containerRow" id="row">
+
+
+
+                    <div class="col-12 cardCol">
+                        <div class="card" *ngFor="let task of i.tasks"
+                            style="margin: 2%; -moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 4px 10px 30px -6px #777; border-radius: 11px;">
+                            <div class="card-body">
+                                <h5 class="card-title text-muted">{{task.task_name}}</h5>
+                                <p><span>Description:</span>{{task.description}}</p>
+                                <p class="card-text">Created By: {{task.created_by}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="viewAll">
+                    <button class="viewButton" (click)="getKey(i.assignment_name,i.id)">ViewAll</button>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngFor="let i of progress">
+            <div class="label">
+                <div class="rowHead">
+                    <h5 class="taskStatus  text-muted">In-Progress</h5>
+                    <div class="count">{{i.tasks.length}}</div>
+                </div>
+                <div class="containerRow" id="row">
+
+                    <div class="col-12 cardCol">
+                        <div class="card" *ngFor="let task of i.tasks"
+                            style="margin: 2%; -moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 4px 10px 30px -6px #777; border-radius: 11px;">
+                            <div class="card-body">
+                                <h5 class="card-title text-muted">{{task.task_name}}</h5>
+                                <p><span>Description:</span>{{task.description}} </p>
+                                <p class="card-text">Created By: {{task.created_by}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="viewAll">
+                    <button class="viewButton" (click)="getKey(i.assignment_name,i.id)">ViewAll</button>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngFor="let i of complete">
+            <div class="label">
+                <div class="rowHead">
+                    <h5 class="taskStatus  text-muted">Completed</h5>
+                    <div class="count">{{i.tasks.length}}</div>
+                </div>
+                <div class="containerRow" id="row">
+
+                    <div class="col-12 cardCol">
+                        <div class="card" *ngFor="let task of i.tasks"
+                            style="margin: 2%; -moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 4px 10px 30px -6px #777; border-radius: 11px;">
+                            <div class="card-body">
+                                <h5 class="card-title text-muted">{{task.task_name}} </h5>
+                                <p><span>Description:</span>{{task.description}}</p>
+                                <p class="card-text">Created By: {{task.created_by}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="viewAll">
+                    <button class="viewButton" (click)="getKey(i.assignment_name,i.id)">ViewAll</button>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
